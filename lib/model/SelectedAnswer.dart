@@ -1,13 +1,17 @@
 class SelectedAnswer {
+  String examId;
   String questionId;
-  String selectedAnswerLabel;
+  String selectedAnswer;
   bool isCorrect;
 
-  SelectedAnswer(this.questionId, this.selectedAnswerLabel, this.isCorrect);
+  SelectedAnswer(
+      {required this.examId,
+      required this.questionId,
+      required this.selectedAnswer,
+      required this.isCorrect});
 
-  bool isCorrectAnswer(String correctAnswerLabel) {
-    this.isCorrect = selectedAnswerLabel == correctAnswerLabel;
-    return this.isCorrect;
+  bool isCorrectAnswer(String correctAnswer) {
+    isCorrect = selectedAnswer == correctAnswer;
+    return isCorrect;
   }
-
 }

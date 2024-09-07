@@ -247,9 +247,8 @@ class QuestionData {
       ),
     ]);
 
-
-    List<Question> getQuestionsByExamId(String examId){
-      return questions.where((question) => question.examId == examId).toList();
-    }
+  }
+  List<Question> getQuestionsByExamId(String examId) {
+    return questions.where((question) => question.examId == examId).toList();
   }
 }

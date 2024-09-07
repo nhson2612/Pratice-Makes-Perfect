@@ -31,9 +31,6 @@ class ExamListWidget extends StatelessWidget {
           final item = exams[index - 1];
           return ExamItemWidget(
             item: item
-            onTap: (){
-              Navigator.push()
-            }
             );
         },
       ),

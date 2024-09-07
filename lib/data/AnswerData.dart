@@ -37,4 +37,13 @@ class AnswerData{
   List<Answer> getAnswersByExamId(String examId){
     return answers.where((answer) => answer.examId == examId).toList();
   }
+
+    Answer? getAnswerByQuestionId(String questionId) {
+    try {
+      return answers.firstWhere((answer) => answer.questionId == questionId);
+    } catch (e) {
+      // Trả về null nếu không tìm thấy Answer nào phù hợp
+      return null;
+    }
+  }
 }

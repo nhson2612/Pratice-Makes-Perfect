@@ -1,26 +1,47 @@
+import 'package:flutter_application_1/data/AnswerData.dart';
 import 'package:flutter_application_1/model/Answer.dart';
+import 'package:flutter_application_1/model/Question.dart';
+import 'package:flutter_application_1/model/Result.dart';
 import 'package:flutter_application_1/model/SelectedAnswer.dart';
 
 class CalculateScoreService {
+  Result calculateScore(
+      List<SelectedAnswer> selectedAnswers, List<Question> questions) {
+    AnswerData answerData = AnswerData();
 
-  void calculateScore(String examId, List<SelectedAnswer> selectedAnswers){
-    List<Answer> answers = getAnswers(examId);
-    Map<String, String> correctAnswers = Map.fromEntries(
-      answers.map((answer) => MapEntry(answer.questionId, answer.correctAnswer))
-    );
+    List<Answer> answers = questions
+        .map(
+            (question) => answerData.getAnswerByQuestionId(question.questionId))
+        .whereType<Answer>() // Lọc bỏ các giá trị null
+        .toList();
 
+    return _calculateScore(selectedAnswers, answers);
+  }
+
+  Result _calculateScore(
+      List<SelectedAnswer> selectedAnswers, List<Answer> answers) {
+    Map<String, String> correctAnswerMap = {};
+
+    answers.forEach((answer) {
+      correctAnswerMap[answer.questionId] = answer.correctAnswer;
+    });
+
+    int correctNumbers = 0;
+    int unanswerNumbes = 0;
+    int incorrectNumbers = 0;
     selectedAnswers.forEach((selectedAnswer) {
-      String questionId = selectedAnswer.questionId;
-      String? correctAnswer = correctAnswers[questionId];
-      if (correctAnswer != null) {
-        selectedAnswer.isCorrectAnswer(correctAnswer);
+      String? correctAnswer = correctAnswerMap[selectedAnswer.questionId];
+      if (correctAnswer != null &&
+        selectedAnswer.isCorrectAnswer(correctAnswer)) {
+        correctNumbers++;
+      } else if (selectedAnswer.selectedAnswer == '') {
+        unanswerNumbes++;
+      } else {
+        incorrectNumbers++;
       }
     });
-  }
 
-  List<Answer> getAnswers(String examId){
-    // get answers from database
-    return [];
+    return Result(correctNumbers.toString() + "/30", correctNumbers,
+        incorrectNumbers, unanswerNumbes);
   }
-
 }
