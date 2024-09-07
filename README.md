@@ -1,16 +1,14 @@
-# flutter_application_1
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+This project is the final project for the Lập Trình Cho Thiết Bị Di Động course by Group 13
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Members
+
+| <a href=#> <img src="https://s120-ava-talk.zadn.vn/4/9/1/5/9/120/21fb61866527bf62a2fc17a9cec961d3.jpg"> | <a href=#> <img src="https://s120-ava-talk.zadn.vn/1/0/1/d/33/120/6908d6b19896feea767cbb5864ad15ba.jpg"> | <a href=#> <img src="https://s120-ava-talk.zadn.vn/3/1/a/d/28/120/bf0dad00d4694ec39f991cdaa70ae89d.jpg"> |
+|---------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| <a href="#"><b>Ngô Văn Thành</b></a>                                                                    | <a href="#"><b>Nguyễn Huy Sơn</b></a>                                                                    | <a href="#"><b>Nguyễn Huy Hiếu</b></a>                                                                   |
+
+
