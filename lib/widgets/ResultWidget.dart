@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/application-service/CalculateScoreService.dart';
 import 'package:flutter_application_1/data/AnswerData.dart';
 import 'package:flutter_application_1/model/Answer.dart';
+import 'package:flutter_application_1/model/Attempt.dart';
 import 'package:flutter_application_1/model/Question.dart';
-import 'package:flutter_application_1/model/Result.dart';
 import 'package:flutter_application_1/model/SelectedAnswer.dart';
+import 'package:flutter_application_1/widgets/QuestionListWidget.dart';
 import 'package:flutter_application_1/widgets/SelectedAnswerDetailWidget.dart';
 
 class ResultWidget extends StatelessWidget {
-  final Result result;
-  final List<Question> questions;
-  final List<SelectedAnswer> selectedAnswers;
+  Attempt attempt;
 
-  ResultWidget(this.questions, this.selectedAnswers)
-      : result = CalculateScoreService().calculateScore(selectedAnswers, questions);
+  ResultWidget(this.attempt) {
+    attempt.result = CalculateScoreService()
+        .calculateScore(attempt.selectedAnswers, attempt.questions);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,9 @@ class ResultWidget extends StatelessWidget {
         title: Row(
           children: [
             Expanded(child: Text("Kết quả bài thi")),
-            ElevatedButton(onPressed: () {}, child: Text("Làm lại"))
+            ElevatedButton(
+                onPressed: () => retakeExam(context, attempt.examId),
+                child: Text("Làm lại"))
           ],
         ),
       ),
@@ -34,7 +37,7 @@ class ResultWidget extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "Điểm : ${result.score}",
+                "Điểm : ${attempt.result.score}",
                 style: TextStyle(color: Colors.blue),
               ),
               SizedBox(width: 10),
@@ -50,15 +53,15 @@ class ResultWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "Đúng : ${result.correctNumbers}",
+                "Đúng : ${attempt.result.correctNumbers}",
                 style: TextStyle(color: Colors.green),
               ),
               Text(
-                "Chưa trả lời : ${result.unanswerNumbes}",
+                "Chưa trả lời : ${attempt.result.unanswerNumbes}",
                 style: TextStyle(color: Colors.orange),
               ),
               Text(
-                "Sai : ${result.incorrectNumbers}",
+                "Sai : ${attempt.result.incorrectNumbers}",
                 style: TextStyle(color: Colors.red),
               ),
             ],
@@ -75,7 +78,7 @@ class ResultWidget extends StatelessWidget {
         Expanded(
           child: GridView.count(
             crossAxisCount: 4,
-            children: this.selectedAnswers.asMap().entries.map((entry) {
+            children: this.attempt.selectedAnswers.asMap().entries.map((entry) {
               int index = entry.key;
               SelectedAnswer ans = entry.value;
               return Center(
@@ -87,7 +90,8 @@ class ResultWidget extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => answerDetail(context, questions[index], ans),
+                        builder: (context) => answerDetail(
+                            context, attempt.questions[index], ans),
                       ),
                     );
                   },
@@ -104,8 +108,16 @@ class ResultWidget extends StatelessWidget {
     );
   }
 
-  Widget answerDetail(BuildContext context, Question question, SelectedAnswer ans) {
-    Answer? answer = AnswerData().getAnswerByQuestionId(question.questionId);
+  Widget answerDetail(
+      BuildContext context, Question question, SelectedAnswer ans) {
+    Answer? answer = AnswerData.getInstance().getAnswerByQuestionId(question.questionId);
     return SelectedAnswerDetailWidget(ans, question, answer!);
+  }
+
+  void retakeExam(BuildContext context, String examId) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => QuestionListWidget(examId,90*60)),
+    );
   }
 }

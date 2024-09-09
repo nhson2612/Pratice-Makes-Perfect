@@ -16,7 +16,6 @@ class Exam{
     required this.duration,
     required this.provider,
     // required this.questions,
-
   });
 
 }

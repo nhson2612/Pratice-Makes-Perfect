@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/data/ExamData.dart';
 import 'package:flutter_application_1/model/Exam.dart';
-import 'package:flutter_application_1/widgets/ExamItemWidget.dart';
+import 'package:flutter_application_1/widgets/ExamCardWidget.dart';
 
 class ExamListWidget extends StatelessWidget {
   
-  List<Exam> exams = ExamData().getAllExams();
+  List<Exam> exams = ExamData.getInstance().getAllExams();
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class ExamListWidget extends StatelessWidget {
               ),
             );
           }
-          final item = exams[index - 1];
-          return ExamItemWidget(
-            item: item
+          final exam = exams[index - 1];
+          return ExamCardWidget(
+            exam: exam,
             );
         },
       ),

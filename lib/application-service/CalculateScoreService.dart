@@ -7,7 +7,7 @@ import 'package:flutter_application_1/model/SelectedAnswer.dart';
 class CalculateScoreService {
   Result calculateScore(
       List<SelectedAnswer> selectedAnswers, List<Question> questions) {
-    AnswerData answerData = AnswerData();
+    AnswerData answerData = AnswerData.getInstance();
 
     List<Answer> answers = questions
         .map(

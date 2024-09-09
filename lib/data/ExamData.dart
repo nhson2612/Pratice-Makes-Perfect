@@ -13,6 +13,13 @@ class ExamData{
     Exam(examId: "SGDVDT-HD-Dia-20/12", name: "Đề thi thử Môn Địa 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.geography, duration: 60, provider: "SGDVDT-HD"),
   ];
 
+  static final ExamData _instance = ExamData._internal();
+  ExamData._internal();
+
+  static ExamData getInstance() {
+    return _instance;
+  }
+
 
   Exam getExamByExamId(String examId){
     return exams.firstWhere((exam) => exam.examId == examId);

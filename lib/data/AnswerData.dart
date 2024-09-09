@@ -1,6 +1,13 @@
 import 'package:flutter_application_1/model/Answer.dart';
 
 class AnswerData{
+  static AnswerData _instance = AnswerData._internal();
+  AnswerData._internal();
+
+  static AnswerData getInstance() {
+    return _instance;
+  }
+
   static List<Answer> answers = [
     Answer("SGDVDT-HD-Toan-20/12", "SGDVDT-HD-Toan-20/12-1", "A","Because 1+1=2"),
     Answer("SGDVDT-HD-Toan-20/12", "SGDVDT-HD-Toan-20/12-2", "A","Because 2+2=4"),
