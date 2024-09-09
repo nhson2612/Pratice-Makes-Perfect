@@ -3,14 +3,14 @@ import 'package:flutter_application_1/model/Subject.dart';
 
 class ExamData{
   static List<Exam> exams = [
-    Exam(examId: "SGDVDT-HD-Toan-20/12", name: "Đề thi thử Môn Toán 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.math, duration: 60, provider: "SGDVDT-HD"),
-    Exam(examId: "SGDVDT-HN-Toan-12/11", name: "Đề thi thử Môn Toán 2023 - Sở giáo dục và đào tạo Hà Nội", subject: Subject.math, duration: 60, provider: "SGDVDT-HN"),
-    Exam(examId: "SGDVDT-HD-Ly-20/12", name: "Đề thi thử Môn Lý 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.physics, duration: 60, provider: "SGDVDT-HD"),
-    Exam(examId: "SGDVDT-HD-Hoa-20/12", name: "Đề thi thử Môn Hóa 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.chemistry, duration: 60, provider: "SGDVDT-HD"),
-    Exam(examId: "SGDVDT-HD-Sinh-20/12", name: "Đề thi thử Môn Sinh 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.biology, duration: 60, provider: "SGDVDT-HD"),
-    Exam(examId: "SGDVDT-HD-Van-20/12", name: "Đề thi thử Môn Văn 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.literature, duration: 60, provider: "SGDVDT-HD"),
-    Exam(examId: "SGDVDT-HD-Su-20/12", name: "Đề thi thử Môn Sử 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.history, duration: 60, provider: "SGDVDT-HD"),
-    Exam(examId: "SGDVDT-HD-Dia-20/12", name: "Đề thi thử Môn Địa 2023 - Sở giáo dục và đào tạo Hải Dương", subject: Subject.geography, duration: 60, provider: "SGDVDT-HD"),
+    Exam("SGDVDT-HD-Toan-20/12", "Đề thi thử Môn Toán 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.math,"SGDVDT-HD"),
+    Exam("SGDVDT-HN-Toan-12/11", "Đề thi thử Môn Toán 2023 - Sở giáo dục và đào tạo Hà Nội,", Subject.math,"SGDVDT-HN"),
+    Exam("SGDVDT-HD-Ly-20/12", "Đề thi thử Môn Lý 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.physics,"SGDVDT-HD"),
+    Exam("SGDVDT-HD-Hoa-20/12", "Đề thi thử Môn Hóa 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.chemistry,"SGDVDT-HD"),
+    Exam("SGDVDT-HD-Sinh-20/12", "Đề thi thử Môn Sinh 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.biology, "SGDVDT-HD"),
+    Exam("SGDVDT-HD-Van-20/12", "Đề thi thử Môn Văn 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.literature, "SGDVDT-HD"),
+    Exam("SGDVDT-HD-Su-20/12", "Đề thi thử Môn Sử 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.history, "SGDVDT-HD"),
+    Exam("SGDVDT-HD-Dia-20/12", "Đề thi thử Môn Địa 2023 - Sở giáo dục và đào tạo Hải Dương", Subject.geography, "SGDVDT-HD"),
   ];
 
   static final ExamData _instance = ExamData._internal();

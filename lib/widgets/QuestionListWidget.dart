@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/AutoGenerateSelectedAnswerService.dart';
 import 'package:flutter_application_1/data/AttemptData.dart';
 import 'package:flutter_application_1/data/QuestionData.dart';
 import 'package:flutter_application_1/model/Attempt.dart';
 import 'package:flutter_application_1/model/Question.dart';
 import 'package:flutter_application_1/model/SelectedAnswer.dart';
+import 'package:flutter_application_1/util/TimeConvert.dart';
 import 'package:flutter_application_1/widgets/QuestionCardWidget.dart';
 import 'package:flutter_application_1/widgets/ResultWidget.dart';
 
@@ -13,7 +15,8 @@ class QuestionListWidget extends StatefulWidget {
   final String examId;
   final int duration;
 
-  const QuestionListWidget(this.examId, this.duration, {Key? key}) : super(key: key);
+  const QuestionListWidget(this.examId, this.duration, {Key? key})
+      : super(key: key);
 
   @override
   State<QuestionListWidget> createState() => _QuestionListWidgetState();
@@ -32,9 +35,9 @@ class _QuestionListWidgetState extends State<QuestionListWidget> {
   void initState() {
     super.initState();
     questions = QuestionData().getQuestionsByExamId(widget.examId);
-    selectedAnswersMap = {};
+    selectedAnswersMap = AutoGenerateSelectedAnswerService.getInstance().generate(questions, widget.examId);
     currentQuestionIndex = 0;
-    attempt = Attempt(questions, [], widget.examId);
+    attempt = Attempt(questions, selectedAnswersMap.values.toList(), widget.examId);
     remainingSeconds = widget.duration;
     _startCountdown();
   }
@@ -51,7 +54,6 @@ class _QuestionListWidgetState extends State<QuestionListWidget> {
         questionId: question.questionId,
         selectedAnswer: selectedLabel,
         examId: widget.examId,
-        isCorrect: false,
       );
       if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
@@ -63,6 +65,7 @@ class _QuestionListWidgetState extends State<QuestionListWidget> {
 
   void submitExam() {
     attempt.selectedAnswers = selectedAnswersMap.values.toList();
+    attempt.setTotalTime(TimeConvert.secondsToHHMMSS(widget.duration - remainingSeconds));
     AttemptData.getInstance().save(attempt);
     Navigator.pushReplacement(
       context,
@@ -86,23 +89,16 @@ class _QuestionListWidgetState extends State<QuestionListWidget> {
                   'Câu ${currentQuestionIndex + 1}/${questions.length}',
                   style: TextStyle(color: Colors.orange),
                 ),
-                Text('${remainingSeconds}s'),
+                Text(TimeConvert.secondsToHHMMSS(remainingSeconds)),
                 ElevatedButton(
-                  onPressed: () {}, 
-                  child: Text("Báo lỗi"),
-                ),
+                    onPressed: () => submitExam(), child: Text("Nộp bài")),
               ],
             ),
           ),
           Expanded(
-            child: QuestionCardWidget(questions[currentQuestionIndex], onSelect),
+            child:
+                QuestionCardWidget(questions[currentQuestionIndex], onSelect),
           ),
-          SizedBox(height: 10),
-          if (isExamCompleted)
-            ElevatedButton(
-              onPressed: submitExam,
-              child: Text('Nộp bài'),
-            ),
         ],
       ),
     );

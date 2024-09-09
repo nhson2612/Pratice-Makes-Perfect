@@ -42,7 +42,7 @@ class ResultWidget extends StatelessWidget {
               ),
               SizedBox(width: 10),
               Icon(Icons.timer, color: Colors.purple),
-              Text('1:28:12')
+              Text(attempt.totalTime)
             ],
           ),
         ),

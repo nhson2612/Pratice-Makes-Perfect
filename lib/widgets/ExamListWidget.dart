@@ -9,6 +9,8 @@ class ExamListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(exams);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('Danh sách đề thi'),

@@ -16,7 +16,7 @@ class ExamCardWidget extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => QuestionListWidget(
               exam.examId,
-              exam.duration * 60,
+              exam.duration,
             ),
           ),
         );
